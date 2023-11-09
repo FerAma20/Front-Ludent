@@ -12,6 +12,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 import logo from '../../assets/logo.png'
 
@@ -68,10 +70,27 @@ export default function Sidebar() {
 
         <Link to='/Clients' key="1">
           <ListItem disablePadding>
-
             <ListItemButton>
               <PeopleIcon></PeopleIcon>
               <ListItemText className='link_sidebar' primary='Clients' />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+
+        <Link to='#' key="1">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <PermContactCalendarIcon></PermContactCalendarIcon>
+              <ListItemText className='link_sidebar' primary='Appoinment' />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+
+        <Link to='#' key="1">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <InventoryIcon></InventoryIcon>
+              <ListItemText className='link_sidebar' primary='Products' />
             </ListItemButton>
           </ListItem>
         </Link>
