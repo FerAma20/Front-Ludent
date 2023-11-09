@@ -5,14 +5,14 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import PeopleIcon from '@mui/icons-material/People';
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import logo from '../../assets/logo.png'
 
 
@@ -60,9 +60,7 @@ export default function Sidebar() {
         <Link to='/' key="1">
           <ListItem disablePadding>
             <ListItemButton>
-              <SvgIcon >
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-              </SvgIcon>
+              <HomeIcon></HomeIcon>
               <ListItemText className='link_sidebar' primary='Dashboard' />
             </ListItemButton>
           </ListItem>
@@ -82,16 +80,28 @@ export default function Sidebar() {
 
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+
+
+      <Link to='#' key="1">
+          <ListItem disablePadding>
+
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              <LoginIcon></LoginIcon>
+              <ListItemText className='link_sidebar' primary='Sign In' />
             </ListItemButton>
           </ListItem>
-        ))}
+        </Link>
+
+        <Link to='#' key="1">
+          <ListItem disablePadding>
+
+            <ListItemButton>
+              <LogoutIcon></LogoutIcon>
+              <ListItemText className='link_sidebar' primary='Sign Out' />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+
       </List>
     </Box>
   );
