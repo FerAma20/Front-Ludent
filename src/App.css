@@ -92,6 +92,7 @@ body{
 
 @media(max-width: 585px){
   .text_footer{
+    margin-top: 15px;
     font-size: 13px;
   }
 
