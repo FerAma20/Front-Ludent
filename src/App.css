@@ -91,5 +91,10 @@ body{
     font-size: 14px;
   }
 
+  .table_list{
+    margin: 3px;
+      width: 100%;
+  }
+
 }
 
