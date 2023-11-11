@@ -62,7 +62,7 @@ export default function Sidebar() {
         <Link to='/' key="1">
           <ListItem disablePadding>
             <ListItemButton>
-              <HomeIcon></HomeIcon>
+              <HomeIcon className='icon_sidebar'></HomeIcon>
               <ListItemText className='link_sidebar' primary='Dashboard' />
             </ListItemButton>
           </ListItem>
@@ -71,7 +71,7 @@ export default function Sidebar() {
         <Link to='/Clients' key="1">
           <ListItem disablePadding>
             <ListItemButton>
-              <PeopleIcon></PeopleIcon>
+              <PeopleIcon className='icon_sidebar'></PeopleIcon>
               <ListItemText className='link_sidebar' primary='Clients' />
             </ListItemButton>
           </ListItem>
@@ -80,7 +80,7 @@ export default function Sidebar() {
         <Link to='#' key="1">
           <ListItem disablePadding>
             <ListItemButton>
-              <PermContactCalendarIcon></PermContactCalendarIcon>
+              <PermContactCalendarIcon className='icon_sidebar'></PermContactCalendarIcon>
               <ListItemText className='link_sidebar' primary='Appoinment' />
             </ListItemButton>
           </ListItem>
@@ -89,7 +89,7 @@ export default function Sidebar() {
         <Link to='#' key="1">
           <ListItem disablePadding>
             <ListItemButton>
-              <InventoryIcon></InventoryIcon>
+              <InventoryIcon className='icon_sidebar'></InventoryIcon>
               <ListItemText className='link_sidebar' primary='Products' />
             </ListItemButton>
           </ListItem>
@@ -105,7 +105,7 @@ export default function Sidebar() {
           <ListItem disablePadding>
 
             <ListItemButton>
-              <LoginIcon></LoginIcon>
+              <LoginIcon className='icon_sidebar'></LoginIcon>
               <ListItemText className='link_sidebar' primary='Sign In' />
             </ListItemButton>
           </ListItem>
@@ -115,7 +115,7 @@ export default function Sidebar() {
           <ListItem disablePadding>
 
             <ListItemButton>
-              <LogoutIcon></LogoutIcon>
+              <LogoutIcon className='icon_sidebar'></LogoutIcon>
               <ListItemText className='link_sidebar' primary='Sign Out' />
             </ListItemButton>
           </ListItem>

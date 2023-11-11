@@ -83,7 +83,12 @@ body{
   color: #1f1f1f;
 }
 .link_sidebar{
+  color: #1f1f1f;
   margin: 0 30px;
+}
+
+.icon_sidebar{
+  color: #84E8E5;
 }
 
 .title_sidebar{
