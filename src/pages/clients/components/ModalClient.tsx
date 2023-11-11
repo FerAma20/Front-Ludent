@@ -83,9 +83,7 @@ export default function ModalClient() {
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                                 Create Client
                             </Typography>
-                            <Button autoFocus color="inherit" onClick={handleClose}>
-                                save
-                            </Button>
+                            
                         </Toolbar>
                     </AppBar>
 
@@ -133,7 +131,11 @@ export default function ModalClient() {
                                 </LocalizationProvider>
                             </div>
                         </div>
-
+                        <div className="row">
+                        <Button className="btn-modal-client" variant="contained" onClick={handleClose}>
+                                save
+                            </Button>
+                        </div>
 
 
 
