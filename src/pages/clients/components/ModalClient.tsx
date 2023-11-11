@@ -15,12 +15,10 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import Stack from '@mui/material/Stack';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import {  DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -33,7 +31,6 @@ const Transition = React.forwardRef(function Transition(
 
 export default function ModalClient() {
     const [age, setAge] = React.useState('');
-    const [value, setValue] = React.useState<Dayjs | null>(null);
     const theme = createTheme({
         palette: {
             primary: {
@@ -102,7 +99,7 @@ export default function ModalClient() {
                         <div className='row'>
                             <div className='col-md-6' >
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                    <InputLabel id="demo-simple-select-label">Type Client</InputLabel>
                                     <Select
                                         className='textField'
                                         labelId="demo-simple-select-label"
