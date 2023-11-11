@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableClients from './components/TableClients'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import ModalClient from "./components/ModalClient";
 
 
 export default function Clients() {
@@ -33,9 +34,8 @@ export default function Clients() {
             </header>
 
             <section className='table_list' >
-                <div className="btn_primary">
-                    <Button variant="contained">Create Client</Button>
-                </div>
+                
+                <ModalClient ></ModalClient>
                 <TableClients></TableClients>
             </section>
 

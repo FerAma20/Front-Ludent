@@ -10,6 +10,13 @@ body{
   display: flex;
 }
 
+.container{
+  display: flex;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+
 .shared_container{
   position: relative;
 }
@@ -90,7 +97,30 @@ body{
   margin-bottom: 15px;
 }
 
+.btn-modal-client{
+  margin: 15px;
+}
+
+.col-md-6{
+  width: 50%;
+}
+
+.row{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.modal-client{
+  padding-top: 25px;
+}
+
+.textField{
+  width: 90%;
+}
+
 @media(max-width: 585px){
+
   .text_footer{
     margin-top: 15px;
     font-size: 13px;
@@ -98,6 +128,16 @@ body{
 
   .table_list{
       width: 98%;
+  }
+  .col-md-6{
+    margin: 8px;
+    width: 100%;
+  }
+
+  .row{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
   }
 
 }
