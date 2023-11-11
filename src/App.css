@@ -107,6 +107,10 @@ body{
   margin: 15px;
 }
 
+.btn-save-client{
+  margin: 0 25px;
+}
+
 .col-md-6{
   width: 50%;
 }

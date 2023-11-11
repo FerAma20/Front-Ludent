@@ -16,7 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import {  DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 
@@ -83,7 +83,7 @@ export default function ModalClient() {
                             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                                 Create Client
                             </Typography>
-                            
+
                         </Toolbar>
                     </AppBar>
 
@@ -118,30 +118,30 @@ export default function ModalClient() {
                         <div className='row'>
                             <div className='col-md-6' >
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                     <DemoItem >
-                                            <MobileDatePicker className='textField' label="Last Appointment" defaultValue={dayjs('2022-04-17')} />
-                                        </DemoItem>
+                                    <DemoItem >
+                                        <MobileDatePicker className='textField' label="Last Appointment" defaultValue={dayjs('2022-04-17')} />
+                                    </DemoItem>
                                 </LocalizationProvider>
                             </div>
                             <div className='col-md-6'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                     <DemoItem >
-                                            <MobileDatePicker className='textField' label="Next Appointment" defaultValue={dayjs('2022-04-17')} />
-                                        </DemoItem>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoItem >
+                                        <MobileDatePicker className='textField' label="Next Appointment" defaultValue={dayjs('2022-04-17')} />
+                                    </DemoItem>
                                 </LocalizationProvider>
                             </div>
                         </div>
+                        
                         <div className="row">
-                        <Button className="btn-modal-client" variant="contained" onClick={handleClose}>
-                                save
-                            </Button>
+                            <div className="btn_primary btn-modal-client">
+                                <Button className="btn-modal-client" variant="contained" onClick={handleClose}>
+                                    save
+                                </Button>
+                            </div>
                         </div>
-
-
-
                     </div>
-
                     {/*Finaliza Contenido del modal */}
+
                 </Dialog>
             </ThemeProvider>
         </React.Fragment>
