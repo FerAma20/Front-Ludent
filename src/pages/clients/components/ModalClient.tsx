@@ -105,7 +105,7 @@ export default function ModalClient() {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={age}
-                                        label="Age"
+                                        label="Type Client"
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={10}>Ten</MenuItem>
