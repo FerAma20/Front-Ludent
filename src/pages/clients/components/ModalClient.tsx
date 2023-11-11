@@ -10,6 +10,17 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Stack from '@mui/material/Stack';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import dayjs, { Dayjs } from 'dayjs';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -21,12 +32,13 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function ModalClient() {
-
+    const [age, setAge] = React.useState('');
+    const [value, setValue] = React.useState<Dayjs | null>(null);
     const theme = createTheme({
         palette: {
             primary: {
                 main: '#84E8E5',
-                light: '#E9DB5D',
+                light: '#84E8E5',
                 dark: '#BAD034',
                 contrastText: '#242105',
             },
@@ -34,6 +46,10 @@ export default function ModalClient() {
     });
     const [open, setOpen] = React.useState(false);
 
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setAge(event.target.value as string);
+    };
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -83,6 +99,44 @@ export default function ModalClient() {
                             <div className='col-md-6' ><TextField className='textField' id="outlined-basic" label="Name" variant="outlined" /></div>
                             <div className='col-md-6'><TextField className='textField' id="outlined-basic" label="Age" variant="outlined" type='number' /></div>
                         </div>
+                        <div className='row'>
+                            <div className='col-md-6' >
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                    <Select
+                                        className='textField'
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={age}
+                                        label="Age"
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Ten</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className='col-md-6'><TextField className='textField' type='number' id="outlined-basic" label="Phone" variant="outlined" /></div>
+                        </div>
+
+                        <div className='row'>
+                            <div className='col-md-6' >
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                     <DemoItem >
+                                            <MobileDatePicker className='textField' label="Last Appointment" defaultValue={dayjs('2022-04-17')} />
+                                        </DemoItem>
+                                </LocalizationProvider>
+                            </div>
+                            <div className='col-md-6'>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                     <DemoItem >
+                                            <MobileDatePicker className='textField' label="Next Appointment" defaultValue={dayjs('2022-04-17')} />
+                                        </DemoItem>
+                                </LocalizationProvider>
+                            </div>
+                        </div>
+
 
 
 

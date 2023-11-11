@@ -15,6 +15,7 @@ body{
   width: 90%;
   height: 100%;
   margin: 0 auto;
+  flex-direction: column;
 }
 
 .shared_container{
@@ -110,13 +111,18 @@ body{
   width: 50%;
 }
 
+
+
 .row{
+  margin-bottom: 20px;
   display: flex;
   width: 100%;
   flex-direction: row;
 }
 
 .modal-client{
+  width: 60%;
+  display: flex;
   padding-top: 25px;
 }
 
@@ -134,9 +140,21 @@ body{
   .table_list{
       width: 98%;
   }
+
+  .row{
+    margin-bottom: 0;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
   .col-md-6{
     margin: 8px;
     width: 100%;
+  }
+
+  .modal-client{
+    width: 100%;
+    display: flex;
   }
 
   .row{
