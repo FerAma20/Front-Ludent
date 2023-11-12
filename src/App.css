@@ -75,7 +75,7 @@ body{
 
 .table_list{
   margin: 0 auto;
-    width: 60%;
+    width: 75%;
 }
 
 .title__clients{
@@ -132,6 +132,30 @@ body{
 
 .textField{
   width: 90%;
+}
+
+
+.content__icon-actions{
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon-delete{
+  color: #b22222;
+  cursor: pointer;
+}
+
+.icon-delete:hover{
+  color: #8b0000;
+}
+
+.icon-edit{
+  color: #a9a9a9;
+  cursor: pointer;
+}
+
+.icon-edit:hover{
+  color: #808080;
 }
 
 @media(max-width: 585px){
