@@ -20,6 +20,11 @@ import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 
+import 'react-phone-number-input/style.css';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';;
+
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
         children: React.ReactElement;
@@ -28,6 +33,24 @@ const Transition = React.forwardRef(function Transition(
 ) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
+
+const schema = yup.object().shape({
+    c_name: yup.string().required('El nombre de usuario es obligatorio'),
+    c_age: yup.string().required('La contraseña es obligatoria'),
+    c_type: yup.string().required('La contraseña es obligatoria'),
+    c_phone: yup.string().required('La contraseña es obligatoria'),
+    c_lastappointment: yup.date().required('La contraseña es obligatoria'),
+    c_nextappointment: yup.date().required('La contraseña es obligatoria'),
+});
+
+type FormValues = {
+    c_name: string;
+    c_age: string;
+    c_type: string;
+    c_phone: string;
+    c_lastappointment: Date;
+    c_nextappointment: Date;
+};
 
 export default function ModalClient() {
     const [age, setAge] = React.useState('');
@@ -42,7 +65,19 @@ export default function ModalClient() {
         },
     });
     const [open, setOpen] = React.useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormValues>({
+        resolver: yupResolver(schema),
+    });
 
+
+    const onSubmit: SubmitHandler<FormValues> = (data) => {
+        // Lógica para manejar datos después de la validación
+        console.log(data);
+    };
 
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
@@ -88,57 +123,69 @@ export default function ModalClient() {
                     </AppBar>
 
                     {/*Inicia Contenido del modal */}
-                    <div className='container modal-client'>
+                    <form className='container modal-client' onSubmit={handleSubmit(onSubmit)}>
 
                         <div className='row'>
-                            <div className='col-md-6' ><TextField className='textField' id="outlined-basic" label="Name" variant="outlined" /></div>
-                            <div className='col-md-6'><TextField className='textField' id="outlined-basic" label="Age" variant="outlined" type='number' /></div>
+                            <div className='col-md-6 row-input' >
+                                <TextField className='textField' id="outlined-basic" label="Name" variant="outlined"  {...register('c_name')} />
+                                <p className='text__error-form'>{errors.c_name?.message}</p>
+                            </div>
+                            <div className='col-md-6 row-input'>
+                                <TextField className='textField' id="outlined-basic" label="Age" variant="outlined" type='number' {...register('c_age')} />
+                                <p className='text__error-form'>{errors.c_age?.message}</p>
+                            </div>
                         </div>
                         <div className='row'>
-                            <div className='col-md-6' >
+                            <div className='col-md-6 row-input' >
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Type Client</InputLabel>
                                     <Select
                                         className='textField'
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={age}
                                         label="Type Client"
-                                        onChange={handleChange}
+                                        {...register('c_type')}
                                     >
                                         <MenuItem value={10}>Adult</MenuItem>
                                         <MenuItem value={20}>Child</MenuItem>
                                     </Select>
                                 </FormControl>
+                                <p className='text__error-form'>{errors.c_type?.message}</p>
                             </div>
-                            <div className='col-md-6'><TextField className='textField' type='number' id="outlined-basic" label="Phone" variant="outlined" /></div>
+                            <div className='col-md-6 row-input'>
+                                <TextField  className='textField' type='number' id="outlined-basic" label="Phone" variant="outlined"  {...register('c_phone')} />
+                                <p className='text__error-form'>{errors.c_phone?.message}</p>
+                                
+                            </div>
                         </div>
 
                         <div className='row'>
-                            <div className='col-md-6' >
+                            <div className='col-md-6 row-input' >
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DemoItem >
-                                        <MobileDatePicker className='textField' label="Last Appointment" defaultValue={dayjs('2022-04-17')} />
+                                        <MobileDatePicker className='textField' label="Last Appointment"  defaultValue={dayjs(new Date())} { ...register('c_lastappointment') } />
                                     </DemoItem>
                                 </LocalizationProvider>
+                                <p className='text__error-form'>{errors.c_lastappointment?.message}</p>
                             </div>
-                            <div className='col-md-6'>
+                            <div className='col-md-6 row-input'>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DemoItem >
-                                        <MobileDatePicker className='textField' label="Next Appointment" defaultValue={dayjs('2022-04-17')} />
+                                        <MobileDatePicker className='textField' label="Next Appointment" defaultValue={dayjs(new Date())} {...register('c_nextappointment')} />
                                     </DemoItem>
                                 </LocalizationProvider>
+                                <p className='text__error-form'>{errors.c_nextappointment?.message}</p>
                             </div>
                         </div>
-                        
+
                         <div className="row">
                             <div className="btn_primary btn-modal-client">
-                                <Button className="btn-modal-client" variant="contained" onClick={handleClose}>
+                                <Button className="btn-modal-client" variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
                                     save
                                 </Button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     {/*Finaliza Contenido del modal */}
 
                 </Dialog>
