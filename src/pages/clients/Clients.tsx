@@ -129,12 +129,12 @@ export default function Clients() {
                                 
                                 <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
                                     <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
-                                        This is a success message!
+                                    Successful registration!
                                     </Alert>
                                 </Snackbar>
                                 <Snackbar open={openE} autoHideDuration={6000} onClose={handleCloseE}>
                                     <Alert onClose={handleCloseE} severity="error" sx={{ width: '100%' }}>
-                                        This is a error message!
+                                    Incorrect registration!
                                     </Alert>
                                 </Snackbar>
                             </Stack>
