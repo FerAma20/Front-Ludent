@@ -4,6 +4,16 @@ import ModalClient from "./components/ModalClient";
 
 import { readAllClients } from "../../services/clients.service";
 
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 interface Data {
@@ -31,6 +41,8 @@ function createData(
 
 export default function Clients() {
 
+    const [openA, setOpenA] = React.useState(false);
+    const [openE, setOpenE] = React.useState(false);
     const [customerUpdate, setCustomerUpdate] = useState(false)
     const [customers, setCustomers] = useState([])
     const [customer, setCustomer] = useState({
@@ -67,6 +79,30 @@ export default function Clients() {
             setDataTable(rows)
         }
     }
+
+    const handleClick = () => {
+        setOpenA(true);
+      };
+    
+      const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenA(false);
+      };
+
+    const handleClickE = () => {
+        setOpenE(true);
+      };
+    
+      const handleCloseE = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenE(false);
+      };
     //fetchData()
     return (
         <div className="clients_container">
@@ -77,7 +113,10 @@ export default function Clients() {
 
             <section className='table_list' >
                 
-                <ModalClient ></ModalClient>
+                <ModalClient
+                handleClick = {handleClick}
+                handleClickE = {handleClickE}
+                ></ModalClient>
                 <TableClients
                  customers={customers}
                  fetchData={fetchData}
@@ -86,7 +125,19 @@ export default function Clients() {
                  setCustomerUpdate={setCustomerUpdate}
                 ></TableClients>
             </section>
-
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                                
+                                <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
+                                    <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
+                                        This is a success message!
+                                    </Alert>
+                                </Snackbar>
+                                <Snackbar open={openE} autoHideDuration={6000} onClose={handleCloseE}>
+                                    <Alert onClose={handleCloseE} severity="error" sx={{ width: '100%' }}>
+                                        This is a error message!
+                                    </Alert>
+                                </Snackbar>
+                            </Stack>
         </div>
     );
 }
