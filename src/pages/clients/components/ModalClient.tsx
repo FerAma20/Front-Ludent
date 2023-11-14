@@ -27,6 +27,17 @@ import * as yup from 'yup';
 
 import { createClient } from '../../../services/clients.service';
 
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
         children: React.ReactElement;
@@ -55,7 +66,9 @@ type FormValues = {
 };
 
 export default function ModalClient() {
-    const [age, setAge] = React.useState('');
+    const [openA, setOpenA] = React.useState(false);
+    const [openE, setOpenE] = React.useState(false);
+    
     const theme = createTheme({
         palette: {
             primary: {
@@ -80,12 +93,18 @@ export default function ModalClient() {
         // Lógica para manejar datos después de la validación
         console.log(data);
         const postclient = await createClient(data)
+        if(postclient.status == 200){
+            handleClick()
+            handleClose()
+        }else{
+            handleClickE()
+        }
+
+       
         console.log(postclient)
     };
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
-    };
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -93,6 +112,32 @@ export default function ModalClient() {
     const handleClose = () => {
         setOpen(false);
     };
+
+
+    
+    const handleClick = () => {
+      setOpenA(true);
+    };
+  
+    const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpenA(false);
+    };
+
+    const handleClickE = () => {
+        setOpenE(true);
+      };
+    
+      const handleCloseE = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenE(false);
+      };
 
     return (
         <React.Fragment>
@@ -189,6 +234,19 @@ export default function ModalClient() {
                                 </Button>
                             </div>
                         </div>
+                        <Stack spacing={2} sx={{ width: '100%' }}>
+                                
+                                <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
+                                    <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
+                                        This is a success message!
+                                    </Alert>
+                                </Snackbar>
+                                <Snackbar open={openE} autoHideDuration={6000} onClose={handleCloseE}>
+                                    <Alert onClose={handleCloseE} severity="error" sx={{ width: '100%' }}>
+                                        This is a error message!
+                                    </Alert>
+                                </Snackbar>
+                            </Stack>
                     </form>
                     {/*Finaliza Contenido del modal */}
 
