@@ -23,7 +23,9 @@ import dayjs from 'dayjs';
 import 'react-phone-number-input/style.css';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';;
+import * as yup from 'yup';
+
+import { createClient } from '../../../services/clients.service';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -35,12 +37,12 @@ const Transition = React.forwardRef(function Transition(
 });
 
 const schema = yup.object().shape({
-    c_name: yup.string().required('El nombre de usuario es obligatorio'),
-    c_age: yup.string().required('La contraseña es obligatoria'),
-    c_type: yup.string().required('La contraseña es obligatoria'),
-    c_phone: yup.string().required('La contraseña es obligatoria'),
-    c_lastappointment: yup.date().required('La contraseña es obligatoria'),
-    c_nextappointment: yup.date().required('La contraseña es obligatoria'),
+    c_name: yup.string().required('Username is required'),
+    c_age: yup.string().required('Age is required'),
+    c_type: yup.string().required('Type client is required'),
+    c_phone: yup.string().required('Phone is required'),
+    c_lastappointment: yup.date().required('Last Appointment is required'),
+    c_nextappointment: yup.date().required('Next Appointment is required'),
 });
 
 type FormValues = {
@@ -74,9 +76,11 @@ export default function ModalClient() {
     });
 
 
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
         // Lógica para manejar datos después de la validación
         console.log(data);
+        const postclient = await createClient(data)
+        console.log(postclient)
     };
 
     const handleChange = (event: SelectChangeEvent) => {
