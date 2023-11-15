@@ -20,7 +20,6 @@ import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 
-import 'react-phone-number-input/style.css';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -80,7 +79,6 @@ type FormValues = {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         // Lógica para manejar datos después de la validación
-        console.log(data);
         const postclient = await createClient(data)
         if(postclient.status == 200){
             handleClick()
@@ -88,9 +86,6 @@ type FormValues = {
         }else{
             handleClickE()
         }
-
-       
-        console.log(postclient)
     };
 
     

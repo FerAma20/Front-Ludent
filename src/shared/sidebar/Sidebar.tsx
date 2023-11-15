@@ -59,7 +59,7 @@ export default function Sidebar() {
       <List>
 
 
-        <Link to='/' key="1">
+        <Link to='/Dashboard' key="1">
           <ListItem disablePadding>
             <ListItemButton>
               <HomeIcon className='icon_sidebar'></HomeIcon>
