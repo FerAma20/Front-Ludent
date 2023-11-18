@@ -80,10 +80,7 @@ const Login = () => {
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         // Lógica para manejar datos después de la validación
         setLoading(true);
-        console.log('entro')
-        console.log(data)
         const verify = await verifyUser(data)
-        console.log(verify)
         if (verify.status == 200) {
             navigate('/Dashboard');
         }
@@ -95,9 +92,6 @@ const Login = () => {
         setOpenA(true);
     };
 
-    function handleClickB() {
-        setLoading(true);
-      }
 
     const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -138,7 +132,7 @@ const Login = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <img src={logo} width='100'></img>
+                        <img src={logo} width='120'></img>
                         <span className='text_navbar'>Ludent</span>
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                             <TextField
