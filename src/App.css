@@ -66,6 +66,12 @@ body{
   color: #E170B7;
 }
 
+.text_login{
+  font-size: 20px;
+  font-weight: bold;
+  color: #E170B7;
+}
+
 .row__table:hover{
   background-color: #f5f5f5;
 }

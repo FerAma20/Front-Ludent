@@ -133,7 +133,7 @@ const Login = () => {
                         }}
                     >
                         <img src={logo} width='120'></img>
-                        <span className='text_navbar'>Ludent</span>
+                        <span className='text_login'>Ludent</span>
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
