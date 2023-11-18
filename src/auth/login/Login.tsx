@@ -34,7 +34,7 @@ function Copyright(props: any) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="#">
-                Your Website
+                StarBook Technology
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
