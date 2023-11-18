@@ -204,7 +204,7 @@ const Login = () => {
 
             <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={openA} autoHideDuration={6000} onClose={handleCloseA}>
                 <Alert onClose={handleCloseA} severity="error" sx={{ width: '100%' }}>
-                    Incorrect data!
+                Incorrect email or password!
                 </Alert>
             </Snackbar>
         </Stack>
