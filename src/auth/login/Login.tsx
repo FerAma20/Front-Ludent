@@ -1,76 +1,206 @@
-import { Link } from "react-router-dom";
+
+import * as React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+import { verifyUser } from "../../services/users.service";
+import logo from '../../assets/logo.png'
+import { useState } from 'react';
+
+function Copyright(props: any) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Copyright © '}
+            <Link color="inherit" href="#">
+                Your Website
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+const schema = yup.object().shape({
+    u_email: yup.string().required('Email is required'),
+    u_password: yup.string().required('Password is required')
+});
+
+type FormValues = {
+    u_email: string;
+    u_password: string;
+};
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 
 const Login = () => {
-    const estilo = {
-        backgroundImage: 'url(../src/assets/images/background/login-register.jpg)' 
+
+    const [openA, setOpenA] = React.useState(false);
+    const [openE, setOpenE] = React.useState(false);
+
+    const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormValues>({
+        resolver: yupResolver(schema),
+    });
+
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        // Lógica para manejar datos después de la validación
+        console.log('entro')
+        console.log(data)
+        const verify = await verifyUser(data)
+        console.log(verify)
+        if (verify.status == 200) {
+            navigate('/Dashboard');
+        }
+        handleClick()
+    };
+
+  const handleClick = () => {
+        setOpenA(true);
       };
-    return (
-      <>
-      <section id="wrapper" className="login-register login-sidebar" style={estilo} >
-        <div className="login-box card">
-            <div className="card-body">
-                <form className="form-horizontal form-material" id="loginform" action="index.html">
-                    <a href="javascript:void(0)" className="text-center db"><img src="../src/assets/images/logo-icon.png" alt="Home" /><br/><span className='text_navbar'>LUDENT    </span></a>
-                    <div className="form-group m-t-40">
-                        <div className="col-xs-12">
-                            <input className="form-control" type="text"  placeholder="Username"/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-xs-12">
-                            <input className="form-control" type="password"  placeholder="Password" />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <div className="col-md-12">
-                            <div className="checkbox checkbox-primary pull-left p-t-0">
-                                <input id="checkbox-signup" type="checkbox" className="filled-in chk-col-light-blue"/>
-                                <label htmlFor="checkbox-signup"> Remember me </label>
-                            </div>
-                            <a href="javascript:void(0)" id="to-recover" className="text-dark pull-right"><i className="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
-                    </div>
-                    <div className="form-group text-center m-t-20">
-                        <div className="col-xs-12">
-                        <Link to='/Dashboard' key="1">
-                        <button className="btn btn-info btn-lg btn-block text-uppercase btn-rounded">Log In</button>
-                        </Link>
-                           
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                            <div className="social"><a href="javascript:void(0)" className="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" className="fa fa-facebook"></i> </a> <a href="javascript:void(0)" className="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" className="fa fa-google-plus"></i> </a> </div>
-                        </div>
-                    </div>
-                    <div className="form-group m-b-0">
-                        <div className="col-sm-12 text-center">
-                            Don't have an account? <a href="pages-register2.html" className="text-primary m-l-5"><b>Sign Up</b></a>
-                        </div>
-                    </div>
-                </form>
-                <form className="form-horizontal" id="recoverform" action="index.html">
-                    <div className="form-group ">
-                        <div className="col-xs-12">
-                            <h3>Recover Password</h3>
-                            <p className="text-muted">Enter your Email and instructions will be sent to you! </p>
-                        </div>
-                    </div>
-                    <div className="form-group ">
-                        <div className="col-xs-12">
-                            <input className="form-control" type="text"  placeholder="Email" />
-                        </div>
-                    </div>
-                    <div className="form-group text-center m-t-20">
-                        <div className="col-xs-12">
-                            <button className="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-      </>
+    
+      const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenA(false);
+      };
+
+
+
+    return (< div className="clients_container">
+
+<ThemeProvider theme={defaultTheme}>
+            <Grid container component="main" sx={{ height: '100vh' }}>
+                <CssBaseline />
+                <Grid
+                    item
+                    xs={false}
+                    sm={4}
+                    md={7}
+                    sx={{
+                        backgroundImage: 'url(../src/assets/images/background/login-register.jpg)',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundColor: (t) =>
+                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                />
+                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Box
+                        sx={{
+                            my: 8,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <img src={logo} width='100'></img>
+                        <span className='text_navbar'>Ludent</span>
+                        <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                autoComplete="email"
+                                autoFocus
+                                {...register('u_email')}
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                {...register('u_password')}
+                            />
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary" />}
+                                label="Remember me"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                onClick={handleSubmit(onSubmit)}
+                            >
+                                Sign In
+                            </Button>
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link href="#" variant="body2">
+                                        Forgot password?
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="#" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                            <Copyright sx={{ mt: 5 }} />
+                        </Box>
+                    </Box>
+                </Grid>
+            </Grid>
+
+            
+
+        </ThemeProvider>
+    
+    
+
+    <Stack  spacing={2} sx={{ width: '100%' }}>
+                                
+                                <Snackbar anchorOrigin={{ vertical:'top', horizontal: 'right'}} open={openA} autoHideDuration={6000} onClose={handleCloseA}>
+                                    <Alert onClose={handleCloseA} severity="error"  sx={{ width: '100%' }}>
+                                    Incorrect data!
+                                    </Alert>
+                                </Snackbar>
+                            </Stack>
+    </div>
+       
     );
-  };
-  
-  export default Login;
+};
+
+export default Login;

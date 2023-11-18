@@ -9,7 +9,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import TextField from '@mui/material/TextField';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
@@ -57,16 +56,7 @@ type FormValues = {
 
  const  ModalClient:React.FC<{ handleClick: any, handleClickE:any}>= ({handleClick, handleClickE}) =>{
     
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#84E8E5',
-                light: '#84E8E5',
-                dark: '#BAD034',
-                contrastText: '#242105',
-            },
-        },
-    });
+   
     const [open, setOpen] = React.useState(false);
     const {
         register,
@@ -100,7 +90,7 @@ type FormValues = {
 
     return (
         <React.Fragment>
-            <ThemeProvider theme={theme}>
+          
                 <div className="btn_primary btn-modal-client">
                     <Button className="btn-modal-client" variant="contained" onClick={handleClickOpen}>
                         Create Client
@@ -198,7 +188,7 @@ type FormValues = {
                     {/*Finaliza Contenido del modal */}
 
                 </Dialog>
-            </ThemeProvider>
+           
         </React.Fragment>
     );
 }

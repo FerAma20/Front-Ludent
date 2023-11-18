@@ -1,5 +1,5 @@
-const HOST = 'https://7dlvv6zq-4210.use2.devtunnels.ms/'
 //const HOST = 'http://localhost:4210/'
+const HOST = 'https://7dlvv6zq-4210.use2.devtunnels.ms/'
 
 export const readAllClients = async () =>{
     const url = `${HOST}api/readAllClients`
@@ -7,9 +7,9 @@ export const readAllClients = async () =>{
     return await response.json()
 }
 
-export const createClient = async (datos: any) => {
+export const verifyUser = async (datos: any) => {
     try {
-      const response = await fetch(`${HOST}api/createClients`, {
+      const response = await fetch(`${HOST}api/verifyUser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

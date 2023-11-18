@@ -66,13 +66,11 @@ export default function Clients() {
       }
 
     useEffect(() => {
-        console.log('en el useEffect')
         fetchData()
         
     }, [])
 
     const fetchData = async () => {
-        console.log('en el fetch')
         const data = await readAllClients()
         if(data.status ==200){
             setCustomers(data.data)

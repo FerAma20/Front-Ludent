@@ -2,19 +2,31 @@
 import './App.css'
 import { Routes, Route, Navigate  } from "react-router-dom"
 import PagesRoutes from './PagesRoutes.tsx';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthRouter from './auth/AuthRoutes.tsx';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#84E8E5',
+            light: '#84E8E5',
+            dark: '#BAD034',
+            contrastText: '#242105',
+        },
+    },
+});
 
   return (
     <>
     
-   
+    <ThemeProvider theme={theme}>
      <Routes>
         <Route path=''  element={<PagesRoutes />} />
         <Route path="/Auth" element={<AuthRouter/>} />
       </Routes>
-   
+      </ThemeProvider>
     </>
   )
 }
