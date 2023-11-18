@@ -23,6 +23,8 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { verifyUser } from "../../services/users.service";
 import logo from '../../assets/logo.png'
 import { useState } from 'react';
@@ -56,15 +58,15 @@ type FormValues = {
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
     ref,
-  ) {
+) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+});
 
 
 const Login = () => {
 
-    const [openA, setOpenA] = React.useState(false);
-    const [openE, setOpenE] = React.useState(false);
+    const [openA, setOpenA] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const {
@@ -77,6 +79,7 @@ const Login = () => {
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         // Lógica para manejar datos después de la validación
+        setLoading(true);
         console.log('entro')
         console.log(data)
         const verify = await verifyUser(data)
@@ -84,26 +87,31 @@ const Login = () => {
         if (verify.status == 200) {
             navigate('/Dashboard');
         }
+        setLoading(false);
         handleClick()
     };
 
-  const handleClick = () => {
+    const handleClick = () => {
         setOpenA(true);
-      };
-    
-      const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    };
+
+    function handleClickB() {
+        setLoading(true);
+      }
+
+    const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
+
         setOpenA(false);
-      };
+    };
 
 
 
     return (< div className="clients_container">
 
-<ThemeProvider theme={defaultTheme}>
+        <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
@@ -157,15 +165,17 @@ const Login = () => {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
-                            <Button
-                                type="submit"
-                                fullWidth
+                            <LoadingButton
+                                color="primary"
+                                loading={loading}
+                                loadingPosition="start"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
+                                fullWidth
                                 onClick={handleSubmit(onSubmit)}
                             >
-                                Sign In
-                            </Button>
+                                <span> Sign In</span>
+                            </LoadingButton>
                             <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
@@ -184,22 +194,22 @@ const Login = () => {
                 </Grid>
             </Grid>
 
-            
+
 
         </ThemeProvider>
-    
-    
 
-    <Stack  spacing={2} sx={{ width: '100%' }}>
-                                
-                                <Snackbar anchorOrigin={{ vertical:'top', horizontal: 'right'}} open={openA} autoHideDuration={6000} onClose={handleCloseA}>
-                                    <Alert onClose={handleCloseA} severity="error"  sx={{ width: '100%' }}>
-                                    Incorrect data!
-                                    </Alert>
-                                </Snackbar>
-                            </Stack>
+
+
+        <Stack spacing={2} sx={{ width: '100%' }}>
+
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={openA} autoHideDuration={6000} onClose={handleCloseA}>
+                <Alert onClose={handleCloseA} severity="error" sx={{ width: '100%' }}>
+                    Incorrect data!
+                </Alert>
+            </Snackbar>
+        </Stack>
     </div>
-       
+
     );
 };
 
