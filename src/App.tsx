@@ -23,8 +23,9 @@ function App() {
     
     <ThemeProvider theme={theme}>
      <Routes>
-        <Route path=''  element={<PagesRoutes />} />
-        <Route path="/Auth" element={<AuthRouter/>} />
+     <Route path="/" element={<AuthRouter/>} />
+        <Route path='/Page'  element={<PagesRoutes />} />
+        
       </Routes>
       </ThemeProvider>
     </>

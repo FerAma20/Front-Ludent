@@ -10,6 +10,13 @@ import Login from './auth/login/Login';
 
 const router = createBrowserRouter([
   {
+
+    
+    path: '/',
+    element:<Login/>
+  
+},
+  {
     path: '/',
     element: <PagesRoutes/>,
     children:[
@@ -23,17 +30,7 @@ const router = createBrowserRouter([
       }
     ]
   },
-  {
-
-    path: '/Auth',
-    element: <AuthRouter/>,
-    children:[
-      {
-        path: '/Auth/Login',
-        element:<Login/>
-      }
-    ]
-  }
+  
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
