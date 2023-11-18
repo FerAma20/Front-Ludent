@@ -43,7 +43,16 @@ function Copyright(props: any) {
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#84E8E5',
+            light: '#84E8E5',
+            dark: '#BAD034',
+            contrastText: '#242105',
+        },
+    },
+});
 
 const schema = yup.object().shape({
     u_email: yup.string().required('Email is required'),
