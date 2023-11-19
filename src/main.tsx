@@ -5,7 +5,6 @@ import { StrictMode } from 'react'
 import PagesRoutes from './PagesRoutes';
 import Dashboard from './pages/dashboard/dashboard';
 import Clients from './pages/clients/Clients';
-import AuthRouter from './auth/AuthRoutes';
 import Login from './auth/login/Login';
 
 const router = createBrowserRouter([

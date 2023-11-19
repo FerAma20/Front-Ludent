@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -10,18 +11,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
 import logo from '../../assets/logo.png'
+import { signOutSession } from '../../utils/sesion.utils';
 
 
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -43,6 +45,12 @@ export default function Sidebar() {
         setState({ ...state, [anchor]: open });
       };
 
+  const signOut =() =>{
+    console.log('entro a la funcion')
+    signOutSession()
+    navigate('/');
+  }
+
   const list = (anchor: Anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -51,11 +59,11 @@ export default function Sidebar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
 
-<div className='title_sidebar'>
-<img src={logo} width='100'></img>
-<span className='text_navbar'>Ludent</span>
-  </div>
-<Divider />
+      <div className='title_sidebar'>
+        <img src={logo} width='100'></img>
+        <span className='text_navbar'>Ludent</span>
+      </div>
+      <Divider />
       <List>
 
 
@@ -68,7 +76,7 @@ export default function Sidebar() {
           </ListItem>
         </Link>
 
-        <Link to='/Clients' key="1">
+        <Link to='/Clients' key="2">
           <ListItem disablePadding>
             <ListItemButton>
               <PeopleIcon className='icon_sidebar'></PeopleIcon>
@@ -77,7 +85,7 @@ export default function Sidebar() {
           </ListItem>
         </Link>
 
-        <Link to='#' key="1">
+        <Link to='#' key="3">
           <ListItem disablePadding>
             <ListItemButton>
               <PermContactCalendarIcon className='icon_sidebar'></PermContactCalendarIcon>
@@ -86,7 +94,7 @@ export default function Sidebar() {
           </ListItem>
         </Link>
 
-        <Link to='#' key="1">
+        <Link to='#' key="4">
           <ListItem disablePadding>
             <ListItemButton>
               <InventoryIcon className='icon_sidebar'></InventoryIcon>
@@ -99,22 +107,10 @@ export default function Sidebar() {
 
       <Divider />
       <List>
+        <Link to='#' onClick={signOut}  key="5">
+          <ListItem disablePadding >
 
-
-      <Link to='/Auth/Login' key="1">
-          <ListItem disablePadding>
-
-            <ListItemButton>
-              <LoginIcon className='icon_sidebar'></LoginIcon>
-              <ListItemText className='link_sidebar' primary='Sign In' />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-
-        <Link to='#' key="1">
-          <ListItem disablePadding>
-
-            <ListItemButton>
+            <ListItemButton >
               <LogoutIcon className='icon_sidebar'></LogoutIcon>
               <ListItemText className='link_sidebar' primary='Sign Out' />
             </ListItemButton>

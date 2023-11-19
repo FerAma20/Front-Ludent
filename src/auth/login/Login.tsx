@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -91,6 +90,12 @@ const Login = () => {
         setLoading(true);
         const verify = await verifyUser(data)
         if (verify.status == 200) {
+            var session = {
+                tokenSession :"true"
+            }
+
+            localStorage.setItem('data_session', JSON.stringify(session));
+            localStorage.setItem('token', JSON.stringify(verify.data[0].token));
             navigate('/Dashboard');
         }
         setLoading(false);
@@ -171,7 +176,6 @@ const Login = () => {
                             <LoadingButton
                                 color="primary"
                                 loading={loading}
-                                loadingPosition="start"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                                 fullWidth
@@ -183,11 +187,6 @@ const Login = () => {
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
                                         Forgot password?
-                                    </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>
                             </Grid>

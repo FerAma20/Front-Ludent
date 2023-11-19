@@ -24,7 +24,13 @@ body{
   position: relative;
 }
 
-.navbar_ludent{background-color: #F5FFFA;}
+.navbar_ludent{
+  padding: 0 5px;
+  background-color: #F5FFFA;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .btn-sidebar{
   color: #888;

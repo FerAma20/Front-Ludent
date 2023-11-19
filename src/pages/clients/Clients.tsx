@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import TableClients from './components/TableClients'
 import ModalClient from "./components/ModalClient";
 
+import { verifyToken } from '../../utils/sesion.utils';
+import { useNavigate } from 'react-router-dom';
+
 import { readAllClients } from "../../services/clients.service";
 
 import Stack from '@mui/material/Stack';
@@ -40,6 +43,7 @@ function createData(
   }
 
 export default function Clients() {
+  const navigate = useNavigate();
 
     const [openA, setOpenA] = React.useState(false);
     const [openE, setOpenE] = React.useState(false);
@@ -66,6 +70,9 @@ export default function Clients() {
       }
 
     useEffect(() => {
+      const token = verifyToken()
+      if(token) navigate('/');
+
         fetchData()
         
     }, [])
@@ -101,7 +108,7 @@ export default function Clients() {
     
         setOpenE(false);
       };
-    //fetchData()
+
     return (
         <div className="clients_container">
             <header>
