@@ -1,6 +1,6 @@
 //const HOST = 'http://localhost:4210/'
 //const HOST = 'https://7dlvv6zq-4210.use2.devtunnels.ms/'
-const HOST = 'http://107.21.5.254:4210/'
+const HOST = 'http://18.234.24.43:4210/'
 
 export const readAllClients = async () =>{
     const url = `${HOST}api/readAllClients`
