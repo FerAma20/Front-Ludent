@@ -46,7 +46,6 @@ export default function Sidebar() {
       };
 
   const signOut =() =>{
-    console.log('entro a la funcion')
     signOutSession()
     navigate('/');
   }
