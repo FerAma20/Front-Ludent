@@ -1,5 +1,4 @@
-
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +24,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { verifyUser } from "../../services/users.service";
+import {  verifyToken } from '../../utils/sesion.utils';
 import logo from '../../assets/logo.png'
 import { useState } from 'react';
 
@@ -84,6 +84,13 @@ const Login = () => {
     } = useForm<FormValues>({
         resolver: yupResolver(schema),
     });
+
+    useEffect(() => {
+        const token = verifyToken()
+        console.log(token)
+        if(token == false) navigate('/Dashboard');
+        
+    }, [])
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
         // Lógica para manejar datos después de la validación
