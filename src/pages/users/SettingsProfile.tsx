@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import HeadProfile from './HeadProfile';
 
-function App() {
+function SettingsProfile() {
   const theme = createTheme({
     palette: {
         primary: {
@@ -16,10 +17,10 @@ function App() {
     <>
     
     <ThemeProvider theme={theme}>
-        
+        <HeadProfile/>
       </ThemeProvider>
     </>
   )
 }
 
-export default App
+export default SettingsProfile

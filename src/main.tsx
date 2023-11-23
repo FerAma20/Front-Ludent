@@ -6,6 +6,7 @@ import PagesRoutes from './PagesRoutes';
 import Dashboard from './pages/dashboard/dashboard';
 import Clients from './pages/clients/Clients';
 import Login from './auth/login/Login';
+import SettingsProfile from './pages/users/SettingsProfile';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/Clients',
         element:<Clients/>
+      },
+      {
+        path: '/Profile',
+        element:<SettingsProfile/>
       }
     ]
   },

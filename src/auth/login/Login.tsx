@@ -28,6 +28,7 @@ import {  verifyToken } from '../../utils/sesion.utils';
 import logo from '../../assets/logo.png'
 import { useState } from 'react';
 
+
 function Copyright(props: any) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -92,7 +93,9 @@ const Login = () => {
         
     }, [])
 
+
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
+        console.log('ento')
         // Lógica para manejar datos después de la validación
         setLoading(true);
         const verify = await verifyUser(data)

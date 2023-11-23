@@ -1,4 +1,4 @@
-//const HOST = 'http://localhost:4210/'
+//const HOST = 'https://localhost:4210/'
 //const HOST = 'https://7dlvv6zq-4210.use2.devtunnels.ms/'
 const HOST = 'https://18.234.24.43:4210/'
 
@@ -10,6 +10,8 @@ export const readAllClients = async () =>{
 
 export const verifyUser = async (datos: any) => {
     try {
+      console.log(datos)
+      console.log(`${HOST}api/verifyUser`)
       const response = await fetch(`${HOST}api/verifyUser`, {
         method: 'POST',
         headers: {
@@ -22,6 +24,7 @@ export const verifyUser = async (datos: any) => {
       }
       return await response.json();
     } catch (error: any) {
+      console.log(error)
      return {status:500}
     }
   }
