@@ -1,5 +1,5 @@
 body {
-  background-color: #fcfcfc;
+  background-color: #f7f7f7;
   place-items: normal;
 }
 
@@ -140,6 +140,24 @@ body {
   flex-direction: row;
 }
 
+.row__profile {
+  margin: 0 0 20px 20px ;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.body-profile__title{
+  width: 100%;
+}
+
+.body-profile__title-text{
+  text-align: left;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
 .modal-client {
   width: 60%;
   display: flex;
@@ -147,6 +165,10 @@ body {
 }
 
 .textField {
+  width: 90%;
+}
+
+.textFieldProfile {
   width: 90%;
 }
 
@@ -195,7 +217,17 @@ body {
   margin: 0 auto;
   margin-top: 15px;
   border-radius: 10px;
-  height: 250px;
+  width: 55%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 5px -2px rgb(0, 0, 0, 0.50);
+}
+
+.container__body-profile {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 15px;
+  border-radius: 10px;
   width: 55%;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 5px -2px rgb(0, 0, 0, 0.50);
@@ -228,7 +260,7 @@ body {
 .head__profile-photo {
   margin: 0 auto;
   padding-left: 35px;
-  margin-top: -38px;
+  margin-top: -58px;
   z-index: 2;
   
 }
@@ -242,7 +274,7 @@ body {
   width: 32px;
   height: 30px;
   cursor: pointer;
-  top: 55px;
+  top: 70px;
   left: -40px;
   background-color: rgb(231, 231, 231);
   border-radius: 55px;
@@ -279,6 +311,12 @@ body {
   font-size: 15px;
 }
 
+.container__profile{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 @media(max-width: 1285px) {
@@ -288,6 +326,10 @@ body {
   }
 
   .container__head {
+    width: 65%;
+  }
+
+  .container__body-profile {
     width: 65%;
   }
 }
@@ -300,6 +342,9 @@ body {
   .container__head {
     width: 75%;
   }
+  .container__body-profile {
+    width: 75%;
+  }
 }
 
 @media(max-width: 1072px) {
@@ -310,12 +355,22 @@ body {
   .container__head {
     width: 80%;
   }
+  .container__body-profile {
+    width: 80%;
+  }
 }
 
 @media(max-width: 585px) {
 
   .container__head {
     width: 90%;
+  }
+  .container__body-profile {
+    width: 90%;
+  }
+
+  .textFieldProfile {
+    width: 100%;
   }
 
   .head__body-properties {
@@ -338,9 +393,21 @@ body {
     flex-direction: row;
   }
 
-  .col-md-6 {
-    margin: 8px;
+  .row__profile{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
     width: 100%;
+  }
+
+  .row-input{
+    margin: 0 auto;
+  }
+
+  .col-md-6 {
+    margin: 8px 0;
+    width: 100%;
+
   }
 
   .modal-client {

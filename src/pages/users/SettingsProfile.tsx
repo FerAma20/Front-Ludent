@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import HeadProfile from './HeadProfile';
+import BodyProfile from './BodyProfile';
 
 function SettingsProfile() {
   const theme = createTheme({
@@ -17,7 +18,11 @@ function SettingsProfile() {
     <>
     
     <ThemeProvider theme={theme}>
-        <HeadProfile/>
+      <div className='container__profile'>
+      <HeadProfile/>
+        <BodyProfile/>
+      </div>
+        
       </ThemeProvider>
     </>
   )

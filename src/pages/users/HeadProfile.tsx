@@ -61,7 +61,7 @@ function HeadProfile() {
                                         className='avatar__profile'
                                         alt="Fernando Escobar"
                                         src="/static/images/avatar/1.jpg"
-                                        sx={{ width: 80, height: 80 }}
+                                        sx={{ width: 110, height: 110 }}
                                     />
                                     <div className='icon-addphoto'>
                                         
