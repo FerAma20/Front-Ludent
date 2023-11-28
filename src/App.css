@@ -363,7 +363,13 @@ body {
 @media(max-width: 585px) {
 
   .container__head {
-    width: 90%;
+    width: 100%;
+  }
+
+  .container__head {
+    border-radius: 0;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0;
   }
   .container__body-profile {
     width: 90%;
@@ -371,6 +377,14 @@ body {
 
   .textFieldProfile {
     width: 100%;
+  }
+
+  .head__profile-photo {
+    margin: 0 ;
+    padding-left: 35px;
+    margin-top: -58px;
+    z-index: 2;
+    
   }
 
   .head__body-properties {

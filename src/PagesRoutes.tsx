@@ -7,7 +7,7 @@ import Footer from './shared/footer/Footer.tsx';
 
 function PagesRoutes() {
   const estilo = {
-    paddingTop: '70px'
+    paddingTop: '42px'
   };
   return (
     <>
