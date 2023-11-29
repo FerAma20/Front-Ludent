@@ -11,8 +11,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+import Perfil from '../../assets/images/fotoPerfil.jpg';
 
 function HeadProfile() {
     const theme = createTheme({
@@ -60,7 +60,7 @@ function HeadProfile() {
                                     <Avatar
                                         className='avatar__profile'
                                         alt="Fernando Escobar"
-                                        src="/static/images/avatar/1.jpg"
+                                        src={Perfil}
                                         sx={{ width: 120, height: 120 }}
                                     />
                                     <div className='icon-addphoto'>
