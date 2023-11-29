@@ -8,9 +8,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+
+import Perfil from '../../assets/images/fotoPerfil.jpg';
 
 import { signOutSession } from '../../utils/sesion.utils';
 
@@ -45,7 +45,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 33, height: 33 }}>FE</Avatar>
+            <Avatar  alt="Fernando Escobar" src={Perfil} sx={{ width: 33, height: 33 }}>FE</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
