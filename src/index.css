@@ -19,6 +19,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -47,9 +48,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -60,9 +63,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
@@ -75,26 +80,36 @@ button:focus-visible {
   height: 100%;
   width: 100%;
   padding: 10% 0;
-  position: fixed; }
+  position: fixed;
+}
 
 .login-box {
   width: 400px;
-  margin: 0 auto; }
-  .login-box .footer {
-    width: 100%;
-    left: 0px;
-    right: 0px; }
-  .login-box .social {
-    display: block;
-    margin-bottom: 30px; }
+  margin: 0 auto;
+}
+
+.login-box .footer {
+  width: 100%;
+  left: 0px;
+  right: 0px;
+}
+
+.login-box .social {
+  display: block;
+  margin-bottom: 30px;
+}
 
 #recoverform {
-  display: none; }
+  display: none;
+}
 
 .login-sidebar {
   padding: 0px;
-  margin-top: 0px; }
-  .login-sidebar .login-box {
-    right: 0px;
-    position: absolute;
-    height: 100%; }
+  margin-top: 0px;
+}
+
+.login-sidebar .login-box {
+  right: 0px;
+  position: absolute;
+  height: 100%;
+}

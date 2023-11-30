@@ -6,12 +6,10 @@ import Footer from './shared/footer/Footer.tsx';
 
 
 function PagesRoutes() {
-  const estilo = {
-    paddingTop: '42px'
-  };
+
   return (
     <>
-    <div className='app_container' style={estilo}>
+    <div className='app_container'>
       <div className='shared_container'>
       <StyledEngineProvider injectFirst>
         <Navbar></Navbar>

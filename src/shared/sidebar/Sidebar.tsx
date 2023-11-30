@@ -84,7 +84,7 @@ export default function Sidebar() {
           </ListItem>
         </Link>
 
-        <Link to='#' key="3">
+        <Link to='/Appointment' key="3">
           <ListItem disablePadding>
             <ListItemButton>
               <PermContactCalendarIcon className='icon_sidebar'></PermContactCalendarIcon>

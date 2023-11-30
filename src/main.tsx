@@ -7,6 +7,7 @@ import Dashboard from './pages/dashboard/dashboard';
 import Clients from './pages/clients/Clients';
 import Login from './auth/login/Login';
 import SettingsProfile from './pages/users/SettingsProfile';
+import Appointment from './pages/appointment/Appointment';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/Clients',
         element:<Clients/>
+      },
+      {
+        path: '/Appointment',
+        element:<Appointment/>
       },
       {
         path: '/Profile',
