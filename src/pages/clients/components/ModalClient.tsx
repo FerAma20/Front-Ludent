@@ -71,10 +71,10 @@ type FormValues = {
         // Lógica para manejar datos después de la validación
         const postclient = await createClient(data)
         if(postclient.status == 200){
-            handleClick()
+            handleClick('Successful registration!')
             handleClose()
         }else{
-            handleClickE()
+            handleClickE('Incorrect registration!')
         }
     };
 

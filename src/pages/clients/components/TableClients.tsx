@@ -12,7 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import moment from 'moment';
 
 interface Column {
-  id: 'c_name' | 'c_age' | 'c_type' | 'c_phone' | 'c_lastappointment' | 'c_nextappointment' | 'action' ;
+  id: 'c_name' | 'c_age' | 'c_type' | 'c_phone' | 'c_lastappointment' | 'c_nextappointment' | 'action';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -50,15 +50,15 @@ const columns: readonly Column[] = [
 ];
 
 
-const  StickyHeadTable:React.FC<{ customers: any, fetchData:any, setCustomer:any, customerUpdate:any, setCustomerUpdate:any }> = ({ customers, fetchData, setCustomer, customerUpdate, setCustomerUpdate }) =>{
+const StickyHeadTable: React.FC<{ customers: any, fetchData: any, setCustomer: any, customerUpdate: any, setCustomerUpdate: any, deleteClientCurrent: any }> = ({ customers, fetchData, setCustomer, customerUpdate, setCustomerUpdate, deleteClientCurrent }) => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const updateCustomer = (customer:any) => {
+  const updateCustomer = (customer: any) => {
     setCustomer(customer)
     setCustomerUpdate(true)
-}
+  }
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -69,10 +69,11 @@ const  StickyHeadTable:React.FC<{ customers: any, fetchData:any, setCustomer:any
   };
 
 
+
   useEffect(() => {
     //fetchData()
     //setDataTable()
-}, [customers])
+  }, [customers])
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -94,7 +95,7 @@ const  StickyHeadTable:React.FC<{ customers: any, fetchData:any, setCustomer:any
           <TableBody>
             {customers
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row:any) => {
+              .map((row: any) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
@@ -109,17 +110,17 @@ const  StickyHeadTable:React.FC<{ customers: any, fetchData:any, setCustomer:any
                                 return value != null ? moment(value).format('D[/]MM[/]YYYY') : '---';
                               case 'c_nextappointment':
                                 return value != null ? moment(value).format('D[/]MM[/]YYYY') : '---';
-                                case 'action':
-                                  return <div className='content__icon-actions'>
-                                    <DeleteIcon className='icon-delete'></DeleteIcon>
-                                    <EditIcon  className='icon-edit'></EditIcon>
-                                  </div>
+                              case 'action':
+                                return <div className='content__icon-actions'>
+                                  <DeleteIcon className='icon-delete' onClick={() => deleteClientCurrent(row.client_id)}></DeleteIcon>
+                                  <EditIcon className='icon-edit'></EditIcon>
+                                </div>
                               default:
                                 return value;
                             }
                           })()
 
-                          } 
+                          }
                         </TableCell>
                       );
                     })}

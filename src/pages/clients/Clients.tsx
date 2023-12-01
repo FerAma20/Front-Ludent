@@ -5,7 +5,7 @@ import ModalClient from "./components/ModalClient";
 import { verifyToken } from '../../utils/sesion.utils';
 import { useNavigate } from 'react-router-dom';
 
-import { readAllClients } from "../../services/clients.service";
+import { readAllClients, deleteClient } from "../../services/clients.service";
 
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
@@ -45,6 +45,7 @@ function createData(
 export default function Clients() {
   const navigate = useNavigate();
 
+  const [message, setMessage] = React.useState('');
     const [openA, setOpenA] = React.useState(false);
     const [openE, setOpenE] = React.useState(false);
     const [customerUpdate, setCustomerUpdate] = useState(false)
@@ -85,7 +86,8 @@ export default function Clients() {
         }
     }
 
-    const handleClick = () => {
+    const handleClick = (msg:string) => {
+      setMessage(msg)
         setOpenA(true);
       };
     
@@ -93,11 +95,11 @@ export default function Clients() {
         if (reason === 'clickaway') {
           return;
         }
-    
         setOpenA(false);
       };
 
-    const handleClickE = () => {
+    const handleClickE = (msg:string) => {
+      setMessage(msg)
         setOpenE(true);
       };
     
@@ -108,6 +110,17 @@ export default function Clients() {
     
         setOpenE(false);
       };
+
+      
+  const deleteClientCurrent = async (client_id: any) => {
+    const deleteUser = await deleteClient({client_id})
+    console.log(deleteUser)
+    if(deleteUser.status == 200){
+      handleClick('Successful removal!')
+    }else{
+      handleClickE('Incorrect removal!')
+  }
+  }
 
     return (
         <div className="clients_container">
@@ -128,18 +141,19 @@ export default function Clients() {
                  setCustomer={setCustomer}
                  customerUpdate={customerUpdate}
                  setCustomerUpdate={setCustomerUpdate}
+                 deleteClientCurrent = {deleteClientCurrent}
                 ></TableClients>
             </section>
             <Stack spacing={2} sx={{ width: '100%' }}>
                                 
                                 <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
                                     <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
-                                    Successful registration!
+                                    {message}
                                     </Alert>
                                 </Snackbar>
                                 <Snackbar open={openE} autoHideDuration={6000} onClose={handleCloseE}>
                                     <Alert onClose={handleCloseE} severity="error" sx={{ width: '100%' }}>
-                                    Incorrect registration!
+                                    {message}
                                     </Alert>
                                 </Snackbar>
                             </Stack>

@@ -123,14 +123,15 @@ export default function Sidebar() {
   return (
     <div>
       {(['left'] as const).map((anchor) => (
-        <React.Fragment key={anchor}>
+        <React.Fragment key={anchor} >
 
 
-          <MenuIcon onClick={toggleDrawer(anchor, true)} className='btn-sidebar'></MenuIcon>
+          <MenuIcon onClick={toggleDrawer(anchor, true)} className='btn-sidebar' ></MenuIcon>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
+            
           >
 
             {list(anchor)}

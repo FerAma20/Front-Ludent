@@ -35,7 +35,7 @@ const ClientList: React.FC<{ customers: any, fetchData:any, setCustomer:any, cus
     return (
         <>
 
-        <TableClients></TableClients>
+   
             <br />
             <br />
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -51,7 +51,7 @@ const ClientList: React.FC<{ customers: any, fetchData:any, setCustomer:any, cus
                             <th className="px-6 py-3 text-center">Phone</th>
                             <th className="px-6 py-3 text-center">Customer Types</th>
                             <th className="px-6 py-3 text-center">Last Appointment</th>
-                            <th className="px-6 py-3 text-center">Next Appointment</th>
+                            <th className="px-6 py-3 text-center">Next Appointmentt</th>
                             <th className="px-6 py-3 text-center"></th>
                         </tr>
                     </thead>
