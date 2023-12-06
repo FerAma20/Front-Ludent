@@ -3,6 +3,9 @@ body {
   place-items: normal;
 }
 
+.css-sghohy-MuiButtonBase-root-MuiButton-root{
+  background-color: #84E8E5;
+}
 
 .root {
   min-width: 100%;

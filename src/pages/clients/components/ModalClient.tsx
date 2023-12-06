@@ -144,8 +144,8 @@ type FormValues = {
                                         label="Type Client"
                                         {...register('c_type')}
                                     >
-                                        <MenuItem value={10}>Adult</MenuItem>
-                                        <MenuItem value={20}>Child</MenuItem>
+                                        <MenuItem value={1}>Adult</MenuItem>
+                                        <MenuItem value={2}>Child</MenuItem>
                                     </Select>
                                 </FormControl>
                                 <p className='text__error-form'>{errors.c_type?.message}</p>
