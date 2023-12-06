@@ -25,7 +25,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { verifyUser } from "../../services/users.service";
 import {  verifyToken } from '../../utils/sesion.utils';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.jpg'
 import { useState } from 'react';
 
 
@@ -42,17 +42,7 @@ function Copyright(props: any) {
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#84E8E5',
-            light: '#84E8E5',
-            dark: '#BAD034',
-            contrastText: '#242105',
-        },
-    },
-});
+
 
 const schema = yup.object().shape({
     u_email: yup.string().required('Email is required'),
@@ -129,14 +119,13 @@ const Login = () => {
 
     return (< div className="clients_container">
 
-        <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
                     item
                     xs={false}
                     sm={4}
-                    md={7}
+                    md={8}
                     sx={{
                         backgroundImage: 'url(../src/assets/images/background/login-register.jpg)',
                         backgroundRepeat: 'no-repeat',
@@ -146,7 +135,7 @@ const Login = () => {
                         backgroundPosition: 'center',
                     }}
                 />
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
                     <Box
                         sx={{
                             my: 8,
@@ -157,7 +146,8 @@ const Login = () => {
                         }}
                     >
                         <img src={logo} width='120'></img>
-                        <span className='text_login'>Ludent</span>
+                        <span className='text_login'>StarBook Technology</span>
+                        <span className='text_login'>(Dental)</span>
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
@@ -205,11 +195,6 @@ const Login = () => {
                     </Box>
                 </Grid>
             </Grid>
-
-
-
-        </ThemeProvider>
-
 
 
         <Stack spacing={2} sx={{ width: '100%' }}>
