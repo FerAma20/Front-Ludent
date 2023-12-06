@@ -28,16 +28,6 @@ type FormValues = {
 };
 
 function BodyProfile() {
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#84E8E5',
-                light: '#84E8E5',
-                dark: '#BAD034',
-                contrastText: '#242105',
-            },
-        },
-    });
 
     const {
         register,
@@ -69,7 +59,7 @@ function BodyProfile() {
     return (
         <>
 
-            <ThemeProvider theme={theme}>
+
                 <section className='head__profile'>
                     <div className='container__body-profile'>
                         <div className='body-profile__title'>
@@ -128,7 +118,6 @@ function BodyProfile() {
                         </div>
                     </div>
                 </section>
-            </ThemeProvider>
         </>
     )
 }

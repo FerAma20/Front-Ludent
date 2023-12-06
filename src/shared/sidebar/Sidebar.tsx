@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import InventoryIcon from '@mui/icons-material/Inventory';
 
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.jpg'
 import { signOutSession } from '../../utils/sesion.utils';
 
 
@@ -59,8 +59,10 @@ export default function Sidebar() {
     >
 
       <div className='title_sidebar'>
-        <img src={logo} width='100'></img>
-        <span className='text_navbar'>Ludent</span>
+        <img src={logo} width='90'></img>
+        <h3 className='text_navbar-name'>StarBook 
+        <span className='text_navbar-name-span'>(Dental)</span>
+        </h3>
       </div>
       <Divider />
       <List>

@@ -8,6 +8,18 @@ import Clients from './pages/clients/Clients';
 import Login from './auth/login/Login';
 import SettingsProfile from './pages/users/SettingsProfile';
 import Appointment from './pages/appointment/Appointment';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+      primary: {
+          main: '#2b5aa2',
+          light: '#2b5aa2',
+          dark: '#213765',
+          contrastText: '#FFFFFF',
+      },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -44,6 +56,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
  <StrictMode>
-<RouterProvider router={router}/>
+   <ThemeProvider theme={theme}>
+   <RouterProvider router={router}/>
+      </ThemeProvider>
+
  </StrictMode>
 )
