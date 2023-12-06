@@ -104,6 +104,11 @@ body {
   color: black;
 }
 
+.container-logs__login{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .row__table:hover {
   background-color: #f5f5f5;
 }

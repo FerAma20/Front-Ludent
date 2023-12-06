@@ -11,7 +11,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -25,7 +24,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 import { verifyUser } from "../../services/users.service";
 import {  verifyToken } from '../../utils/sesion.utils';
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.jpg';
+import logoLud from '../../assets/logo.png';
+import backgroundPicture from '../../assets/images/background/login-register.jpg';
 import { useState } from 'react';
 
 
@@ -127,7 +128,7 @@ const Login = () => {
                     sm={4}
                     md={8}
                     sx={{
-                        backgroundImage: 'url(../src/assets/images/background/login-register.jpg)',
+                        backgroundImage: `url(${backgroundPicture})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -145,9 +146,12 @@ const Login = () => {
                             alignItems: 'center',
                         }}
                     >
+                        <div className='container-logs__login'>
                         <img src={logo} width='120'></img>
-                        <span className='text_login'>StarBook Technology</span>
-                        <span className='text_login'>(Dental)</span>
+                        <img src={logoLud} width='110'></img>
+                        </div>
+                        
+                        <span className='text_login'>StarBook  -  Ludent</span>
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
