@@ -349,6 +349,44 @@ body {
   flex-direction: column;
 }
 
+.title-info__appointment{
+  display: flex;
+  height: 40px;
+  background-color: #2b5aa2;
+}
+
+.text__title-info__appointment{
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0 auto;
+  margin-top: 9px;
+}
+
+.container-info__appointment{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.label-info__appointment{
+  color: #1f1f1f;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.text-label-info__appointment{
+  color: #1f1f1f;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.btn__new-appointment{
+  margin-top: 15px;
+}
+
+
 
 
 @media(max-width: 1285px) {
