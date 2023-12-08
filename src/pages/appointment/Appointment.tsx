@@ -14,7 +14,6 @@ import Button from '@mui/material/Button';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -22,9 +21,6 @@ import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 import { readAllAppointment } from '../../services/appointment.service';
-
-import imageBoy from '../../assets/images/clients/boy.jpg'
-import imageMan from '../../assets/images/clients/man.jpg'
 
 import logo from '../../assets/logo.jpg'
 
@@ -36,12 +32,12 @@ export default function Appointment() {
   const [currentAppointment, setCurrentAppointment] = useState({
 
     c_age: 0,
-    c_lastappointment : "",
-    c_name : "",
-    c_nextappointment : "",
-    c_phone : 0,
-    c_type : 0,
-    client_id : 0
+    c_lastappointment: "",
+    c_name: "",
+    c_nextappointment: "",
+    c_phone: 0,
+    c_type: 0,
+    client_id: 0
   });
   const [appointments, setAppointments] = useState([]);
 
@@ -53,10 +49,9 @@ export default function Appointment() {
   });
 
 
-
-  const toggleDrawer = (anchor: Anchor, open: boolean, currentAppoint:any) =>
+  const toggleDrawer = (anchor: Anchor, open: boolean, currentAppoint: any) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
-      if(open){
+      if (open) {
         setCurrentAppointment(currentAppoint)
       }
       if (
@@ -102,25 +97,39 @@ export default function Appointment() {
       <Divider />
 
       <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Name</h3>
-        <h4 className='text-label-info__appointment'>{currentAppointment.c_name}</h4>
+        <Typography component="div" className='text_navbar-name' >
+          Name
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {currentAppointment.c_name}
+        </Typography>
       </div>
 
       <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Age</h3>
-        <h4 className='text-label-info__appointment'>{currentAppointment.c_age}</h4>
+        <Typography component="div" className='text_navbar-name' >
+          Age
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {currentAppointment.c_age}
+        </Typography>
       </div>
 
       <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Phone</h3>
-        <h4 className='text-label-info__appointment'>+502 {currentAppointment.c_phone}</h4>
+        <Typography component="div" className='text_navbar-name' >
+          Phone
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          +502 {currentAppointment.c_phone}
+        </Typography>
       </div>
 
       <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Next Appointment</h3>
-        <h4 className='text-label-info__appointment'>
-        {currentAppointment.c_nextappointment != null ? moment(currentAppointment.c_nextappointment).format('D[/]MM[/]YYYY') : '---'}
-        </h4>
+        <Typography component="div" className='text_navbar-name' >
+          Next Appointment
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {currentAppointment.c_nextappointment != null ? moment(currentAppointment.c_nextappointment).format('D[/]MM[/]YYYY') : '---'}
+        </Typography>
       </div>
       <Divider />
 
@@ -134,7 +143,6 @@ export default function Appointment() {
           </LocalizationProvider>
         </div>
 
-
         <div className="btn__new-appointment" >
           <Button variant="contained">New Appointment</Button>
         </div>
@@ -146,11 +154,12 @@ export default function Appointment() {
 
   return (
 
-
     <>
-
       <Container sx={{ py: 8 }} maxWidth="md">
-        <h2>Next Appointments</h2>
+        <header>
+          <h1 className="title__clients">Next Appointments</h1>
+        </header>
+        <br />
         {/* End hero unit */}
         <Grid container spacing={4}>
           {appointments.map((card: any) => (
@@ -161,27 +170,15 @@ export default function Appointment() {
                   onClick={toggleDrawer('right', true, card)}
                 >
 
-
-
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                      height: '250px'
-                    }}
-                    image={card.c_type == 1 ? imageMan : imageBoy}
-
-                  />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h6" >
+                    <Typography component="div" className='text_navbar-name' >
                       {card.c_name}
                     </Typography>
-                    <Typography>
+
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                       {card.c_nextappointment != null ? moment(card.c_nextappointment).format('D[/]MM[/]YYYY') : '---'}
                     </Typography>
                   </CardContent>
-
 
                 </Card>
               </CardActionArea>
@@ -190,11 +187,11 @@ export default function Appointment() {
         </Grid>
       </Container>
 
-
       <Drawer
         anchor='right'
         open={state['right']}
         onClose={toggleDrawer('right', false, null)}
+        className='drawer-infoApp'
       >
         {list()}
       </Drawer>
