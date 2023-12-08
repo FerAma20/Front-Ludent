@@ -129,13 +129,15 @@ export default function Sidebar() {
 
 
           <MenuIcon onClick={toggleDrawer(anchor, true)} className='btn-sidebar' ></MenuIcon>
-          <SwipeableDrawer
+          <SwipeableDrawer 
             anchor={anchor}
-            onOpen={toggleDrawer(anchor, true)}
+            open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
           >
+
             {list(anchor)}
-          </SwipeableDrawer>
+          </SwipeableDrawer >
         </React.Fragment>
       ))}
     </div>
