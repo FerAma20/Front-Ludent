@@ -20,22 +20,29 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { CardActionArea } from '@mui/material';
 import moment from 'moment';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { readAllAppointment } from '../../services/appointment.service';
 
 import imageBoy from '../../assets/images/clients/boy.jpg'
 import imageMan from '../../assets/images/clients/man.jpg'
-import AppointmentInfo from './AppointmentInfo';
 
 import logo from '../../assets/logo.jpg'
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+
 type Anchor = 'right';
 
 export default function Appointment() {
 
+  const [currentAppointment, setCurrentAppointment] = useState({
+
+    c_age: 0,
+    c_lastappointment : "",
+    c_name : "",
+    c_nextappointment : "",
+    c_phone : 0,
+    c_type : 0,
+    client_id : 0
+  });
   const [appointments, setAppointments] = useState([]);
 
   const [state, setState] = useState({
@@ -47,19 +54,21 @@ export default function Appointment() {
 
 
 
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) =>
-      (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-          event.type === 'keydown' &&
-          ((event as React.KeyboardEvent).key === 'Tab' ||
-            (event as React.KeyboardEvent).key === 'Shift')
-        ) {
-          return;
-        }
+  const toggleDrawer = (anchor: Anchor, open: boolean, currentAppoint:any) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if(open){
+        setCurrentAppointment(currentAppoint)
+      }
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
 
-        setState({ ...state, [anchor]: open });
-      };
+      setState({ ...state, [anchor]: open });
+    };
 
 
   useEffect(() => {
@@ -68,14 +77,12 @@ export default function Appointment() {
 
   const getData = async () => {
     const data = await readAllAppointment()
-    console.log(data)
     if (data.status == 200) {
       setAppointments(data.data)
-      console.log(appointments)
     }
 
   }
-  const list = (anchor: Anchor) => (
+  const list = () => (
     <Box
       sx={{ width: 325 }}
       role="presentation"
@@ -96,50 +103,42 @@ export default function Appointment() {
 
       <div className='container-info__appointment'>
         <h3 className='label-info__appointment'>Name</h3>
-        <h4 className='text-label-info__appointment'>Fernando Amado Escobar Perez</h4>
+        <h4 className='text-label-info__appointment'>{currentAppointment.c_name}</h4>
       </div>
 
       <div className='container-info__appointment'>
         <h3 className='label-info__appointment'>Age</h3>
-        <h4 className='text-label-info__appointment'>26</h4>
+        <h4 className='text-label-info__appointment'>{currentAppointment.c_age}</h4>
       </div>
 
       <div className='container-info__appointment'>
         <h3 className='label-info__appointment'>Phone</h3>
-        <h4 className='text-label-info__appointment'>+502 47487661</h4>
-      </div>
-
-      <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Mail</h3>
-        <h4 className='text-label-info__appointment'>ferama22@gmail.com</h4>
-      </div>
-
-      <div className='container-info__appointment'>
-        <h3 className='label-info__appointment'>Last Appointment</h3>
-        <h4 className='text-label-info__appointment'>12/06/2023</h4>
+        <h4 className='text-label-info__appointment'>+502 {currentAppointment.c_phone}</h4>
       </div>
 
       <div className='container-info__appointment'>
         <h3 className='label-info__appointment'>Next Appointment</h3>
-        <h4 className='text-label-info__appointment'>15/12/2023</h4>
+        <h4 className='text-label-info__appointment'>
+        {currentAppointment.c_nextappointment != null ? moment(currentAppointment.c_nextappointment).format('D[/]MM[/]YYYY') : '---'}
+        </h4>
       </div>
       <Divider />
 
       <div className='container-info__appointment' >
 
-      <div className="btn__new-appointment" >
-      <LocalizationProvider dateAdapter={AdapterDayjs} >
-          <DemoItem >
-            <MobileDatePicker label="Next Appointment" defaultValue={dayjs(new Date())} />
-          </DemoItem>
-        </LocalizationProvider>
+        <div className="btn__new-appointment" >
+          <LocalizationProvider dateAdapter={AdapterDayjs} >
+            <DemoItem >
+              <MobileDatePicker label="New Appointment" defaultValue={dayjs(new Date())} />
+            </DemoItem>
+          </LocalizationProvider>
         </div>
-        
+
 
         <div className="btn__new-appointment" >
-        <Button variant="contained">New Appointment</Button>
+          <Button variant="contained">New Appointment</Button>
         </div>
-       
+
       </div>
 
     </Box>
@@ -148,7 +147,7 @@ export default function Appointment() {
   return (
 
 
-<>
+    <>
 
       <Container sx={{ py: 8 }} maxWidth="md">
         <h2>Next Appointments</h2>
@@ -159,7 +158,7 @@ export default function Appointment() {
               <CardActionArea>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                  onClick={toggleDrawer('right', true)}
+                  onClick={toggleDrawer('right', true, card)}
                 >
 
 
@@ -181,7 +180,6 @@ export default function Appointment() {
                     <Typography>
                       {card.c_nextappointment != null ? moment(card.c_nextappointment).format('D[/]MM[/]YYYY') : '---'}
                     </Typography>
-                    <AppointmentInfo />
                   </CardContent>
 
 
@@ -196,11 +194,11 @@ export default function Appointment() {
       <Drawer
         anchor='right'
         open={state['right']}
-        onClose={toggleDrawer('right', false)}
+        onClose={toggleDrawer('right', false, null)}
       >
-        {list('right')}
+        {list()}
       </Drawer>
 
-      </>
+    </>
   );
 }
