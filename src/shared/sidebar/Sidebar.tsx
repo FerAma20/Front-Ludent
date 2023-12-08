@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -129,15 +129,15 @@ export default function Sidebar() {
 
 
           <MenuIcon onClick={toggleDrawer(anchor, true)} className='btn-sidebar' ></MenuIcon>
-          <SwipeableDrawer 
+          <Drawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
+            
           >
 
             {list(anchor)}
-          </SwipeableDrawer >
+          </Drawer>
         </React.Fragment>
       ))}
     </div>

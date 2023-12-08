@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -187,15 +187,14 @@ export default function Appointment() {
         </Grid>
       </Container>
 
-      <SwipeableDrawer
+      <Drawer
         anchor='right'
         open={state['right']}
         onClose={toggleDrawer('right', false, null)}
-        onOpen={toggleDrawer('right', true, null)}
         className='drawer-infoApp'
       >
         {list()}
-      </SwipeableDrawer>
+      </Drawer>
 
     </>
   );
