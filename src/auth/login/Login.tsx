@@ -79,14 +79,12 @@ const Login = () => {
 
     useEffect(() => {
         const token = verifyToken()
-        console.log(token)
         if(token == false) navigate('/Dashboard');
         
     }, [])
 
 
     const onSubmit: SubmitHandler<FormValues> = async (data) => {
-        console.log('ento')
         // Lógica para manejar datos después de la validación
         setLoading(true);
         const verify = await verifyUser(data)

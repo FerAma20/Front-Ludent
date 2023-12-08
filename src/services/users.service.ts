@@ -10,8 +10,6 @@ export const readAllClients = async () =>{
 
 export const verifyUser = async (datos: any) => {
     try {
-      console.log(datos)
-      console.log(`${HOST}api/verifyUser`)
       const response = await fetch(`${HOST}api/verifyUser`, {
         method: 'POST',
         headers: {
@@ -24,7 +22,6 @@ export const verifyUser = async (datos: any) => {
       }
       return await response.json();
     } catch (error: any) {
-      console.log(error)
      return {status:500}
     }
   }

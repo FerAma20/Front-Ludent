@@ -5,6 +5,7 @@ import PagesRoutes from './PagesRoutes.tsx';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthRouter from './auth/AuthRoutes.tsx';
+import Footer from './shared/footer/Footer.tsx';
 
 function App() {
   const theme = createTheme({
@@ -27,6 +28,7 @@ function App() {
         <Route path='/Page'  element={<PagesRoutes />} />
         
       </Routes>
+      <Footer></Footer>
       </ThemeProvider>
     </>
   )
