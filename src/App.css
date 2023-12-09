@@ -1,5 +1,7 @@
 body {
   background-color: #f7f7f7;
+  background-image: url('./assets/images/background/welcome.svg');
+  background-repeat: no-repeat;
   place-items: normal;
 }
 
