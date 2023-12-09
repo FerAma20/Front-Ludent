@@ -45,7 +45,7 @@ export default function Sidebar() {
         setState({ ...state, [anchor]: open });
       };
 
-  const signOut =() =>{
+  const signOut = () => {
     signOutSession()
     navigate('/');
   }
@@ -60,8 +60,8 @@ export default function Sidebar() {
 
       <div className='title_sidebar'>
         <img src={logo} width='90'></img>
-        <h3 className='text_navbar-name'>StarBook 
-        <span className='text_navbar-name-span'>(Dental)</span>
+        <h3 className='text_navbar-name'>StarBook
+          <span className='text_navbar-name-span'>(Dental)</span>
         </h3>
       </div>
       <Divider />
@@ -108,7 +108,7 @@ export default function Sidebar() {
 
       <Divider />
       <List>
-        <Link to='#' onClick={signOut}  key="5">
+        <Link to='#' onClick={signOut} key="5">
           <ListItem disablePadding >
 
             <ListItemButton >
@@ -133,7 +133,7 @@ export default function Sidebar() {
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
-            
+
           >
 
             {list(anchor)}

@@ -12,53 +12,53 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-      primary: {
-          main: '#2b5aa2',
-          light: '#2b5aa2',
-          dark: '#213765',
-          contrastText: '#FFFFFF',
-      },
+    primary: {
+      main: '#2b5aa2',
+      light: '#2b5aa2',
+      dark: '#213765',
+      contrastText: '#FFFFFF',
+    },
   },
 });
 
 const router = createBrowserRouter([
   {
 
-    
+
     path: '/',
-    element:<Login/>
-  
-},
+    element: <Login />
+
+  },
   {
     path: '/',
-    element: <PagesRoutes/>,
-    children:[
+    element: <PagesRoutes />,
+    children: [
       {
         path: '/Dashboard',
-        element:<Dashboard/>
+        element: <Dashboard />
       },
       {
         path: '/Clients',
-        element:<Clients/>
+        element: <Clients />
       },
       {
         path: '/Appointment',
-        element:<Appointment/>
+        element: <Appointment />
       },
       {
         path: '/Profile',
-        element:<SettingsProfile/>
+        element: <SettingsProfile />
       }
     ]
   },
-  
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
- <StrictMode>
-   <ThemeProvider theme={theme}>
-   <RouterProvider router={router}/>
-      </ThemeProvider>
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
 
- </StrictMode>
+  </StrictMode>
 )

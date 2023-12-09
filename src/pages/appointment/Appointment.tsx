@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,7 +11,11 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 
 import Button from '@mui/material/Button';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
+import Snackbar from '@mui/material/Snackbar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
@@ -20,15 +24,34 @@ import Container from '@mui/material/Container';
 import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
-import { readAllAppointment } from '../../services/appointment.service';
+import { readAllAppointment, setAppointment } from '../../services/appointment.service';
 
 import logo from '../../assets/logo.jpg'
+
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 type Anchor = 'right';
 
+type FormValues = {
+  c_newappointment: Date;
+};
+
+const schema = yup.object().shape({
+  c_newappointment: yup.date().required('New Appointment is required'),
+});
+
 export default function Appointment() {
 
+  const [message, setMessage] = React.useState('');
+  const [openA, setOpenA] = React.useState(false);
   const [currentAppointment, setCurrentAppointment] = useState({
 
     c_age: 0,
@@ -48,6 +71,35 @@ export default function Appointment() {
     right: false,
   });
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // Lógica para manejar datos después de la validación
+    const datas = {
+      client_id: currentAppointment.client_id,
+      c_lastappointment: currentAppointment.c_nextappointment,
+      c_nextappointment: data.c_newappointment
+    }
+    const result = await setAppointment(datas);
+
+    if(result.status == 200){
+      handleClick("New appointment success!")
+      setState({ ...state, ['right']: false });
+      getData()
+    }
+  };
+
+
+  const handleClick = (msg: string) => {
+    setMessage(msg)
+    setOpenA(true);
+  };
 
   const toggleDrawer = (anchor: Anchor, open: boolean, currentAppoint: any) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -64,11 +116,20 @@ export default function Appointment() {
 
       setState({ ...state, [anchor]: open });
     };
+  
 
 
   useEffect(() => {
     getData()
   }, [])
+
+  
+  const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenA(false);
+  };
 
   const getData = async () => {
     const data = await readAllAppointment()
@@ -77,6 +138,8 @@ export default function Appointment() {
     }
 
   }
+
+
   const list = () => (
     <Box
       sx={{ width: 325 }}
@@ -135,17 +198,22 @@ export default function Appointment() {
 
       <div className='container-info__appointment' >
 
-        <div className="btn__new-appointment" >
-          <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <DemoItem >
-              <MobileDatePicker label="New Appointment" defaultValue={dayjs(new Date())} />
-            </DemoItem>
-          </LocalizationProvider>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="btn__new-appointment" >
-          <Button variant="contained">New Appointment</Button>
-        </div>
+          <div className="btn__new-appointment" >
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
+              <DemoItem >
+                <MobileDatePicker label="New Appointment" defaultValue={dayjs(new Date())} {...register('c_newappointment')} />
+              </DemoItem>
+            </LocalizationProvider>
+            <p className='text__error-form'>{errors.c_newappointment?.message}</p>
+          </div>
+
+          <div className="btn__new-appointment" >
+            <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>New Appointment</Button>
+          </div>
+        </form>
+
 
       </div>
 
@@ -196,6 +264,11 @@ export default function Appointment() {
         {list()}
       </Drawer>
 
+      <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
+          <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
     </>
   );
 }
