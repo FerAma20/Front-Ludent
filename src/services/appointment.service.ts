@@ -1,6 +1,6 @@
 //const HOST = 'https://7dlvv6zq-4210.use2.devtunnels.ms/'
-//const HOST = 'https://localhost:4210/'
-const HOST = 'https://18.234.24.43:4210/'
+const HOST = 'https://localhost:4210/'
+//const HOST = 'https://18.234.24.43:4210/'
 
 export const readAllAppointment = async () =>{
     const url = `${HOST}api/readAllAppointment`
@@ -32,8 +32,6 @@ export const createClient = async (datos: any) => {
 
   export const setAppointment = async (datos: any) => {
     try {
-      console.log(datos)
-      console.log(`${HOST}api/setAppointment`)
       const response = await fetch(`${HOST}api/setAppointment`, {
         method: 'PUT',
         headers: {

@@ -11,10 +11,6 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 
 import Button from '@mui/material/Button';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
 import Snackbar from '@mui/material/Snackbar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -25,10 +21,11 @@ import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 import { readAllAppointment, setAppointment } from '../../services/appointment.service';
-
+import {  verifyToken } from '../../utils/sesion.utils';
 import logo from '../../assets/logo.jpg'
 
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -40,16 +37,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 type Anchor = 'right';
 
-type FormValues = {
-  c_newappointment: Date;
-};
-
-const schema = yup.object().shape({
-  c_newappointment: yup.date().required('New Appointment is required'),
-});
-
 export default function Appointment() {
-
+  const navigate = useNavigate();
+  
+  const [dateInput, setDateInput] = React.useState('')
   const [message, setMessage] = React.useState('');
   const [openA, setOpenA] = React.useState(false);
   const [currentAppointment, setCurrentAppointment] = useState({
@@ -71,29 +62,32 @@ export default function Appointment() {
     right: false,
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: yupResolver(schema),
-  });
+  
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const onSubmit= async () => {
     // Lógica para manejar datos después de la validación
     const datas = {
       client_id: currentAppointment.client_id,
       c_lastappointment: currentAppointment.c_nextappointment,
-      c_nextappointment: data.c_newappointment
+      c_nextappointment: dateInput
     }
+    
     const result = await setAppointment(datas);
 
     if(result.status == 200){
       handleClick("New appointment success!")
       setState({ ...state, ['right']: false });
       getData()
+
+      const sss = new Date()
+      setDateInput(sss.toLocaleTimeString())
     }
   };
+
+  const handleInputChange = (event:any) => {
+    
+    setDateInput(event)
+  }
 
 
   const handleClick = (msg: string) => {
@@ -120,6 +114,8 @@ export default function Appointment() {
 
 
   useEffect(() => {
+    const token = verifyToken()
+    if (token) navigate('/');
     getData()
   }, [])
 
@@ -198,19 +194,18 @@ export default function Appointment() {
 
       <div className='container-info__appointment' >
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form >
 
           <div className="btn__new-appointment" >
             <LocalizationProvider dateAdapter={AdapterDayjs} >
               <DemoItem >
-                <MobileDatePicker label="New Appointment" defaultValue={dayjs(new Date())} {...register('c_newappointment')} />
+                <MobileDatePicker  label="New Appointment" defaultValue={dayjs(new Date())} onChange={handleInputChange} />
               </DemoItem>
             </LocalizationProvider>
-            <p className='text__error-form'>{errors.c_newappointment?.message}</p>
           </div>
 
           <div className="btn__new-appointment" >
-            <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>New Appointment</Button>
+            <Button variant="contained" onClick={onSubmit}>New Appointment</Button>
           </div>
         </form>
 

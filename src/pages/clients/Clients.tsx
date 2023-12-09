@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import TableClients from './components/TableClients'
-import ModalClient from "./components/ModalClient";
-
-import { verifyToken } from '../../utils/sesion.utils';
-import { useNavigate } from 'react-router-dom';
-
-import { readAllClients, deleteClient } from "../../services/clients.service";
 
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+
+import TableClients from './components/TableClients'
+import ModalClient from "./components/ModalClient";
+import { verifyToken } from '../../utils/sesion.utils';
+import { useNavigate } from 'react-router-dom';
+import { readAllClients, deleteClient } from "../../services/clients.service";
+
+
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
