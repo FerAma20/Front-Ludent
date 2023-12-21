@@ -21,7 +21,7 @@ import { CardActionArea } from '@mui/material';
 import moment from 'moment';
 
 import { readAllAppointment, setAppointment } from '../../services/appointment.service';
-import {  verifyToken } from '../../utils/sesion.utils';
+import { verifyToken } from '../../utils/sesion.utils';
 import logo from '../../assets/logo.jpg'
 
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
@@ -39,7 +39,7 @@ type Anchor = 'right';
 
 export default function Appointment() {
   const navigate = useNavigate();
-  
+
   const [dateInput, setDateInput] = React.useState('')
   const [message, setMessage] = React.useState('');
   const [openA, setOpenA] = React.useState(false);
@@ -62,19 +62,19 @@ export default function Appointment() {
     right: false,
   });
 
-  
 
-  const onSubmit= async () => {
+
+  const onSubmit = async () => {
     // Lógica para manejar datos después de la validación
     const datas = {
       client_id: currentAppointment.client_id,
       c_lastappointment: currentAppointment.c_nextappointment,
       c_nextappointment: dateInput
     }
-    
+
     const result = await setAppointment(datas);
 
-    if(result.status == 200){
+    if (result.status == 200) {
       handleClick("New appointment success!")
       setState({ ...state, ['right']: false });
       getData()
@@ -84,8 +84,8 @@ export default function Appointment() {
     }
   };
 
-  const handleInputChange = (event:any) => {
-    
+  const handleInputChange = (event: any) => {
+
     setDateInput(event)
   }
 
@@ -110,7 +110,7 @@ export default function Appointment() {
 
       setState({ ...state, [anchor]: open });
     };
-  
+
 
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export default function Appointment() {
     getData()
   }, [])
 
-  
+
   const handleCloseA = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -135,12 +135,10 @@ export default function Appointment() {
 
   }
 
-
   const list = () => (
     <Box
       sx={{ width: 325 }}
       role="presentation"
-
     >
       <div className='title_sidebar'>
         <img src={logo} width='90'></img>
@@ -199,7 +197,7 @@ export default function Appointment() {
           <div className="btn__new-appointment" >
             <LocalizationProvider dateAdapter={AdapterDayjs} >
               <DemoItem >
-                <MobileDatePicker  label="New Appointment" defaultValue={dayjs(new Date())} onChange={handleInputChange} />
+                <MobileDatePicker label="New Appointment" defaultValue={dayjs(new Date())} onChange={handleInputChange} />
               </DemoItem>
             </LocalizationProvider>
           </div>
@@ -208,8 +206,6 @@ export default function Appointment() {
             <Button variant="contained" onClick={onSubmit}>New Appointment</Button>
           </div>
         </form>
-
-
       </div>
 
     </Box>
@@ -219,8 +215,13 @@ export default function Appointment() {
 
     <>
       <Container sx={{ py: 8 }} maxWidth="md">
-        <header>
+        <header className='header-title__appointment'>
           <h1 className="title__clients">Next Appointments</h1>
+          <LocalizationProvider dateAdapter={AdapterDayjs} >
+              <DemoItem >
+                <MobileDatePicker views={['month', 'year']} label="Search" defaultValue={dayjs(new Date())} onChange={handleInputChange} />
+              </DemoItem>
+            </LocalizationProvider>
         </header>
         <br />
         {/* End hero unit */}
@@ -232,7 +233,6 @@ export default function Appointment() {
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                   onClick={toggleDrawer('right', true, card)}
                 >
-
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography component="div" className='text_navbar-name' >
                       {card.c_name}
@@ -260,10 +260,10 @@ export default function Appointment() {
       </Drawer>
 
       <Snackbar open={openA} autoHideDuration={6000} onClose={handleCloseA}>
-          <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
-            {message}
-          </Alert>
-        </Snackbar>
+        <Alert onClose={handleCloseA} severity="success" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
